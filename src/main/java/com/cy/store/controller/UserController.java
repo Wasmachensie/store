@@ -20,11 +20,28 @@ public class UserController extends BaseController {
     @Autowired
     private IUserService userService;
 
+    /*
+    * 1.接收数据方式：
+    * 请求处理方法的参数列表设置为pojo类型来接收前端传递过来的数据
+    * SpringBoot会将前端的url地址中的参数名和pojo类的属性进行比较，
+    * 如果这两个名称相同，则自动注入到pojo类的属性上
+    * */
     //优化后写法
     @RequestMapping("reg")
     public JsonResult<Void> reg(User user){
         userService.reg(user);
         return new JsonResult<>(OK);
+    }
+
+    /*
+    * 2.接收数据方式：
+    * 请求处理方法的参数列表设置为非pojo类型，
+    * SpringBoot会将请求的参数名和参数值进行比较，如果名称相同，则自动注入到参数列表中
+    * */
+    @RequestMapping("login")
+    public JsonResult<User> login(String username,String password){
+        User data = userService.login(username, password);
+        return new JsonResult<>(OK,data);
     }
 
 

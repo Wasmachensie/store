@@ -143,5 +143,32 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
+
+	<script type="text/javascript">
+		//1.监听注册按钮是否被点击,(id要用#),如果被点击可以执行一个方法
+		$("#btn-login").click(function () {
+			//动态获取表单中控制的数据
+			console.log($("#form-login").serialize);
+			$.ajax({
+				url: "/users/login",
+				type: "POST",
+				data: $("#form-login").serialize(),
+				dataType: "json",
+				success: function (json) {
+					if (json.state == "200") {
+						alert("登录成功");
+						//跳转到系统主页：index.html
+						//相对路径来确定跳转的页面
+						location.href = "index.html";
+					} else {
+						alert("登录失败");
+					}
+				},
+				error: function (xhr) {
+					alert("登录时产生未知异常" + xhr.message);
+				}
+			})
+		})
+	</script>
 	</body>
 </html>

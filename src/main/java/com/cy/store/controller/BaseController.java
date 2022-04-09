@@ -1,5 +1,7 @@
 package com.cy.store.controller;
 
+import com.cy.store.service.ex.PasswordNotMatchException;
+import com.cy.store.service.ex.UserNotFoundException;
 import com.cy.store.service.ex.UsernameDuplicationException;
 import com.cy.store.utils.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -31,6 +33,12 @@ public class BaseController{
         if (e instanceof UsernameDuplicationException){
             result.setState(4000);
             result.setMessage("用户名被占用");
+        } else if (e instanceof UserNotFoundException) {
+            result.setState(4001);
+            result.setMessage("用户名不存在");
+        } else if (e instanceof PasswordNotMatchException) {
+            result.setState(4002);
+            result.setMessage("密码错误");
         } else if (e instanceof ServerException){
             result.setState(5000);
             result.setMessage("在注册过程中产生未知异常，注册失败");
