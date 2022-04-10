@@ -22,23 +22,19 @@ public class JsonResult<E> implements Serializable {
     private E Date;
 
     public JsonResult() {
-        super();
     }
 
     public JsonResult(Integer state) {
-        super();
         this.state = state;
     }
 
     //出现异常时调用
     public JsonResult(Throwable e) {
-        super();
         //获取异常对象中的异常信息
         this.message = e.getMessage();
     }
 
     public JsonResult(Integer state, E date) {
-        super();
         this.state = state;
         this.Date = date;
     }

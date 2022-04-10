@@ -143,7 +143,7 @@
 		//1.监听注册按钮是否被点击,(id要用#),如果被点击可以执行一个方法
 		$("#btn-reg").click(function () {
 			//动态获取表单中控制的数据
-			console.log($("#form-reg").serialize);
+			console.log($("#form-reg").serialize());
 			//2.发送ajax()的异步请求来完成用户的注册功能
 			$.ajax({
 				url: "/users/reg",
@@ -153,7 +153,7 @@
 				data: $("#form-reg").serialize(),
 				dataType: "JSON",
 				success: function (json) {
-					if (json.state == "200") {
+					if (json.state == 200 ) {
 						alert("注册成功");
 					} else {
 						alert("注册失败");
@@ -162,8 +162,8 @@
 				error: function (xhr) {
 					alert("注册时产生未知错误！" + xhr.status);
 				}
-			})
-		})
+			});
+		});
 	</script>
 	</body>
 

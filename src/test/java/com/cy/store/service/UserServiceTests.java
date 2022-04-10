@@ -32,8 +32,8 @@ public class UserServiceTests {
     public void reg(){
         try {
             User user = new User();
-            user.setUsername("李秘");
-            user.setPassword("123456");
+            user.setUsername("mm");
+            user.setPassword("123");
             userService.reg(user);//该方法无返回值
             System.out.println("OK");
         } catch (ServiceException e) {
@@ -50,4 +50,24 @@ public class UserServiceTests {
         User user = userService.login("test02", "123");
         System.out.println(user);
     }
+
+    @Test
+    public void changePassword(){
+        userService.changePassword(7,"test02", "123", "123456");
+    }
+
+    @Test
+    public void getByUid(){
+        System.out.println(userService.getByUid(18));
+    }
+
+    @Test
+    public void changeInfo(){
+        User user = new User();
+        user.setPhone("12345678901");
+        user.setEmail("18181@qq.com");
+        user.setGender(0);
+        userService.changeInfo(18, "test18", user);
+    }
+
 }

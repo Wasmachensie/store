@@ -1,12 +1,9 @@
 package com.cy.store.controller;
 
-import com.cy.store.service.ex.PasswordNotMatchException;
-import com.cy.store.service.ex.UserNotFoundException;
-import com.cy.store.service.ex.UsernameDuplicationException;
+import com.cy.store.service.ex.*;
 import com.cy.store.utils.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.rmi.ServerException;
 
 /**
  * @Author: 8Nuyoah
@@ -26,7 +23,7 @@ public class BaseController{
     *
     * 当项目中产生异常会被统一拦截到此方法中，这个方法此时就充当的是请求处理方法，
     * 方法的返回值直接给到前端*/
-    @ExceptionHandler(ServerException.class)
+    @ExceptionHandler(ServiceException.class)
     //请求处理方法，这个方法的返回值就是需要返回给前端的数据,数据的包装类型是JsonResult
     public JsonResult<Void> handlerException(Throwable e){
         JsonResult<Void> result = new JsonResult<>(e);
@@ -39,9 +36,12 @@ public class BaseController{
         } else if (e instanceof PasswordNotMatchException) {
             result.setState(4002);
             result.setMessage("密码错误");
-        } else if (e instanceof ServerException){
+        } else if (e instanceof InsertException){
             result.setState(5000);
             result.setMessage("在注册过程中产生未知异常，注册失败");
+        } else if (e instanceof UpdateException){
+            result.setState(5001);
+            result.setMessage("在更新过程中产生未知异常，注册失败");
         }
         return result;
     }

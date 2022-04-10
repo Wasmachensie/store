@@ -5,10 +5,13 @@ com\cy\store\service\ex\PasswordNotMatchException.class
 com\cy\store\StoreApplication.class
 com\cy\store\service\ex\UsernameDuplicationException.class
 com\cy\store\utils\JsonResult.class
+com\cy\store\service\ex\UpdateException.class
 com\cy\store\controller\BaseController.class
 com\cy\store\mapper\UserMapper.class
 com\cy\store\service\ex\InsertException.class
-com\cy\store\service\ex\UsernameNotFoundException.class
+com\cy\store\interceptor\LoginInterceptor.class
+com\cy\store\service\ex\UserNotFoundException.class
 com\cy\store\entity\User.class
 com\cy\store\service\IUserService.class
+com\cy\store\config\LoginInterceptorConfig.class
 com\cy\store\entity\BaseEntity.class
