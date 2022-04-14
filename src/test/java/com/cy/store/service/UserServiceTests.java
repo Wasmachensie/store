@@ -70,4 +70,9 @@ public class UserServiceTests {
         userService.changeInfo(18, "test18", user);
     }
 
+    @Test
+    public void changeAvatar() {
+        userService.changeAvatar(18, "管理员","/avatar/18.jpg");
+    }
+
 }

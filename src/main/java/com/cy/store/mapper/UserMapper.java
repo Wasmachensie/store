@@ -66,5 +66,22 @@ public interface UserMapper {
      */
     Integer updateInfoByUid(User user);
 
+    /**
+     * @Param("SQL映射文件中#{}占位符的变量名"):解决的问题:
+     *  当SQL语句的占位符和映射的接口方法参数名不一致时，
+     *  需要将某个参数强行注入到某个占位符变量上是，
+     *  可以用@Param注解来标注映射的关系
+     * 根据用户uid来修改用户头像
+     * @param uid
+     * @param avatar
+     * @param modifiedUser
+     * @param modifiedTime
+     * @return 受影响的行数
+     */
+    Integer updateAvatarByUid(@Param("uid") Integer uid,
+                              @Param("avatar") String avatar,
+                              @Param("modifiedUser") String modifiedUser,
+                              @Param("modifiedTime") Date modifiedTime);
+
 
 }

@@ -4,6 +4,7 @@ import com.cy.store.entity.User;
 import com.cy.store.mapper.UserMapper;
 import com.cy.store.service.IUserService;
 import com.cy.store.service.ex.*;
+import com.cy.store.utils.JudgeUserResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -95,6 +96,7 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         user.setUid(result.getUid());
         user.setUsername(result.getUsername());
+        //在登录的时候返回有用户的头像
         user.setAvatar(result.getAvatar());
         //将当前的用户数据返回，返回的数据是为了辅助其他页面做数据展示使用(uid,username,avatar)
         return user;
@@ -165,6 +167,19 @@ public class UserServiceImpl implements IUserService {
         Integer rows = userMapper.updateInfoByUid(user);
         if (rows != 1) {
             throw new UpdateException("更新数据时产生未知的异常");
+        }
+    }
+
+    @Override
+    public void changeAvatar(Integer uid, String username, String avatar) {
+        //建议先查询用户数据存不存在
+        User result = userMapper.findByUid(uid);
+        if (result == null || result.getIsDelete() == 1) {
+            throw new UserNotFoundException("用户未找到");
+        }
+        Integer rows = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+        if (rows != 1) {
+            throw new UpdateException("更新用户头像产生未知异常");
         }
     }
 

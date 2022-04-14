@@ -160,6 +160,8 @@
 						//跳转到系统主页：index.html
 						//相对路径来确定跳转的页面
 						location.href = "index.html";
+						//将服务器端返回的头像设置到cookie中,expires:存活时间
+						$.cookie("avatar",json.data.avatar,{expires:7});
 					} else {
 						alert("登录失败");
 					}

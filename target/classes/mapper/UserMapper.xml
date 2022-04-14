@@ -69,6 +69,15 @@
         WHERE uid=#{uid}
     </update>
 
+    <!--根据用户uid来修改用户头像-->
+    <update id="updateAvatarByUid">
+        UPDATE t_user
+        SET
+            avatar=#{avatar},
+            modified_user=#{modifiedUser},
+            modified_time=#{modifiedTime}
+        WHERE uid=#{uid}
+    </update>
 
 
 </mapper>
